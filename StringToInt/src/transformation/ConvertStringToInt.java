@@ -2,44 +2,45 @@ package transformation;
 
 public class ConvertStringToInt {
 
+    static int num;
     public static void main(String[] args) {
 
-        String s = "-1234";
-        StringToInt(s);
+        String input = "";
+        if(input.length() >= 2 && input.length() <= Math.pow(2,32) ){
+            stringToInt(input);
+        }
+
 
     }
 
-    public static void StringToInt(String s) throws NumberFormatException {
+    public static void stringToInt(String input) throws NumberFormatException {
 
-        if (s.isEmpty()) {
+        if (input.isEmpty()) {
             throw new NumberFormatException("null");
         }
-        char firstChar = s.charAt(0);
-        int num = 0;
+        char firstChar = input.charAt(0);
         if (firstChar == '+' | firstChar == '-') {
-            for (int i = 1; i < s.length(); i++) {
-                if (((int) s.charAt(i) >= 48) && ((int) s.charAt(i) <= 59)) {
-                    num = num * 10 + ((int) s.charAt(i) - 48);
-                } else {
-                    throw new NumberFormatException();
-                }
-            }
-            if(firstChar == '+'){
+            transformationCycle(1, input);
+            if (firstChar == '+') {
                 System.out.println(num);
             } else {
                 System.out.println("-" + num);
             }
-        }
-
-        else {
-            for (int i = 0; i < s.length(); i++) {
-                if (((int) s.charAt(i) >= 48) && ((int) s.charAt(i) <= 59)) {
-                    num = num * 10 + ((int) s.charAt(i) - 48);
-                } else {
-                    throw new NumberFormatException();
-                }
-            }
+        } else {
+            transformationCycle(0, input);
             System.out.println(num);
         }
+    }
+
+    public static int transformationCycle(int a, String input) {
+
+        for (int i= a; i < input.length(); i++) {
+            if ((input.charAt(i) >= 48) && (input.charAt(i) <= 59)) {
+                num = num * 10 + (input.charAt(i) - 48);
+            } else {
+                throw new NumberFormatException();
+            }
+        }
+        return num;
     }
 }
