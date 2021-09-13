@@ -4,7 +4,7 @@ public class ConvertStringToInt {
 
     public static void main(String[] args) {
 
-        String s = "+1234";
+        String s = "-1234";
         StringToInt(s);
 
     }
@@ -16,7 +16,7 @@ public class ConvertStringToInt {
         }
         char firstChar = s.charAt(0);
         int num = 0;
-        if (firstChar == '+') {
+        if (firstChar == '+' | firstChar == '-') {
             for (int i = 1; i < s.length(); i++) {
                 if (((int) s.charAt(i) >= 48) && ((int) s.charAt(i) <= 59)) {
                     num = num * 10 + ((int) s.charAt(i) - 48);
@@ -24,30 +24,22 @@ public class ConvertStringToInt {
                     throw new NumberFormatException();
                 }
             }
-            System.out.println(num);
-
-        } else if (firstChar == '-') {
-            for (int i = 1; i < s.length(); i++) {
-                if (((int) s.charAt(i) >= 48) && ((int) s.charAt(i) <= 59)) {
-                    num = num * 10 + ((int) s.charAt(i) - 48);
-                } else {
-                    throw new NumberFormatException();
-                }
-
+            if(firstChar == '+'){
+                System.out.println(num);
+            } else {
+                System.out.println("-" + num);
             }
-            System.out.println("-" + num);
+        }
 
-        } else {
+        else {
             for (int i = 0; i < s.length(); i++) {
                 if (((int) s.charAt(i) >= 48) && ((int) s.charAt(i) <= 59)) {
                     num = num * 10 + ((int) s.charAt(i) - 48);
                 } else {
                     throw new NumberFormatException();
                 }
-
             }
             System.out.println(num);
         }
-
     }
 }
